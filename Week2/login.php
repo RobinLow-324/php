@@ -11,18 +11,17 @@ $inputPassword = '1995';
 
 if ($inputUsername == $username && $inputPassword == $password) {
 
-    echo "<p>$username</p>";
-    echo "<p>$password</p>";
     echo "Login successful!";
+    echo "<p> Welcome , $username. </p>";
 
 } elseif ($inputUsername != $username) {
 
-    echo "<p>$password</p>";
+    echo "<p> Correct password </p>";
     echo "Invalid username";
 
 } else {
 
-    echo "<p>$username</p>";
+    echo "<p> Correct username </p>";
     echo "Invalid password";
 
 }
