@@ -7,6 +7,7 @@ $username = 'Robin';
 $password = '1995';
 
 $inputUsername = 'Robin';
+$inputPassword = '1995';
 
 if ($inputUsername == $username && $inputPassword == $password) {
 
