@@ -3,18 +3,18 @@
 <body>
 <?php
 
-$username = 'Robin';
-$password = '1995';
+const username = 'Robin';
+const password = '1995';
 
 $inputUsername = 'Robin';
 $inputPassword = '1995';
 
-if ($inputUsername == $username && $inputPassword == $password) {
+if ($inputUsername == username && $inputPassword == password) {
 
     echo "Login successful!";
-    echo "<p> Welcome , $username. </p>";
+    echo "<p> Welcome to this page. </p>";
 
-} elseif ($inputUsername != $username) {
+} elseif ($inputUsername != username) {
 
     echo "<p> Correct password </p>";
     echo "Invalid username";
