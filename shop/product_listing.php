@@ -36,7 +36,7 @@
         }
 
         // Select all data
-        $query = "SELECT id, name, description, price FROM products ORDER BY id DESC";
+        $query = "SELECT id, name, description, price ,expired_date, manufacture_date FROM products ORDER BY id DESC";
         $stmt = $con->prepare($query);
         $stmt->execute();
 
@@ -58,7 +58,10 @@
             echo "<th>Name</th>";
             echo "<th>Description</th>";
             echo "<th>Price</th>";
+            echo "<th>manufacture_date</th>";
+            echo "<th>expired_date</th>";
             echo "<th>Action</th>";
+
             echo "</tr>";
 
             // Retrieve our table contents
@@ -72,6 +75,8 @@
                 echo "<td>" . htmlspecialchars($name, ENT_QUOTES) . "</td>";
                 echo "<td>" . htmlspecialchars($description, ENT_QUOTES) . "</td>";
                 echo "<td>" . htmlspecialchars($price, ENT_QUOTES) . "</td>";
+                echo "<td>" . htmlspecialchars($manufacture_date, ENT_QUOTES) . "</td>";
+                echo "<td>" . htmlspecialchars($expired_date, ENT_QUOTES) . "</td>";
                 echo "<td>";
                 // Read one record
                 echo "<a href='read_one.php?id={$id}' class='btn btn-info m-r-1em'>Read</a>";

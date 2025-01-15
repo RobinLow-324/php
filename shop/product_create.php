@@ -24,11 +24,10 @@
                 $price = $_POST['price'];
                 $promotion_price = $_POST['promotion_price'];
                 $manufacture_date = $_POST['manufacture_date'];
-                $expiry_date = $_POST['expiry_date'];
+                $expired_date = $_POST['expired_date'];
 
                 $errors = [];
 
-                // Validate fields
                 if (empty($name)) {
                     $errors[] = "Name is required.";
                 }
@@ -41,11 +40,11 @@
                 if (!empty($manufacture_date) && !checkdate(substr($manufacture_date, 5, 2), substr($manufacture_date, 8, 2), substr($manufacture_date, 0, 4))) {
                     $errors[] = "Invalid manufacture date.";
                 }
-                if (!empty($expiry_date) && !checkdate(substr($expiry_date, 5, 2), substr($expiry_date, 8, 2), substr($expiry_date, 0, 4))) {
+                if (!empty($expired_date) && !checkdate(substr($expired_date, 5, 2), substr($expired_date, 8, 2), substr($expired_date, 0, 4))) {
                     $errors[] = "Invalid expiry date.";
                 }
                 if (!empty($manufacture_date) && !empty($expiry_date) && strtotime($expiry_date) <= strtotime($manufacture_date)) {
-                    $errors[] = "Expiry date must be later than manufacture date.";
+                    $errors[] = "Expired date date must be later than manufacture date.";
                 }
 
                 // Display errors
@@ -56,14 +55,14 @@
                     }
                     echo "</ul></div>";
                 } else {
-                    $query = "INSERT INTO products SET name=:name, description=:description, price=:price, promotion_price=:promotion_price, manufacture_date=:manufacture_date, expiry_date=:expiry_date, created=:created";
+                    $query = "INSERT INTO products SET name=:name, description=:description, price=:price, promotion_price=:promotion_price, manufacture_date=:manufacture_date, expired_date=:expired_date, created=:created";
                     $stmt = $con->prepare($query);
                     $stmt->bindParam(':name', $name);
                     $stmt->bindParam(':description', $description);
                     $stmt->bindParam(':price', $price);
                     $stmt->bindParam(':promotion_price', $promotion_price);
                     $stmt->bindParam(':manufacture_date', $manufacture_date);
-                    $stmt->bindParam(':expiry_date', $expiry_date);
+                    $stmt->bindParam(':expired_date', $expired_date);
                     $created = date('Y-m-d H:i:s');
                     $stmt->bindParam(':created', $created);
 
@@ -102,8 +101,8 @@
                     <td><input type='date' name='manufacture_date' class='form-control' /></td>
                 </tr>
                 <tr>
-                    <td>Expiry Date</td>
-                    <td><input type='date' name='expiry_date' class='form-control' /></td>
+                    <td>Expired Date</td>
+                    <td><input type='date' name='expired_date' class='form-control' /></td>
                 </tr>
                 <tr>
                     <td></td>

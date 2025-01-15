@@ -18,7 +18,7 @@
         include 'config/database.php';
 
         try {
-            $query = "SELECT id, name, description, price FROM products WHERE id = ? LIMIT 0,1";
+            $query = "SELECT id, name, description, price, expired_date, manufacture_date FROM products WHERE id = ? LIMIT 0,1";
             $stmt = $con->prepare($query);
 
             $stmt->bindParam(1, $id);
@@ -30,6 +30,8 @@
             $name = $row['name'];
             $description = $row['description'];
             $price = $row['price'];
+            $manufacture_date = $row['manufacture_date'];
+            $expired_date = $row['expired_date'];
         } catch (PDOException $exception) {
             die('ERROR: ' . $exception->getMessage());
         }
@@ -39,15 +41,21 @@
         if ($_POST) {
             try {
                 $query = "UPDATE products
-                  SET name=:name, description=:description,
-   price=:price WHERE id = :id";
+                  SET name=:name, description=:description, price=:price, manufacture_date=:manufacture_date, expired_date=:expired_date WHERE id = :id";
                 $stmt = $con->prepare($query);
+
                 $name = htmlspecialchars(strip_tags($_POST['name']));
                 $description = htmlspecialchars(strip_tags($_POST['description']));
                 $price = htmlspecialchars(strip_tags($_POST['price']));
+                $manufacture_date = htmlspecialchars(strip_tags($_POST['manufacture_date']));
+                $expired_date = htmlspecialchars(strip_tags($_POST['expired_date']));
+
+
                 $stmt->bindParam(':name', $name);
                 $stmt->bindParam(':description', $description);
                 $stmt->bindParam(':price', $price);
+                $stmt->bindParam(':manufacture_date', $manufacture_date);
+                $stmt->bindParam(':expired_date', $expired_date);
                 $stmt->bindParam(':id', $id);
                 if ($stmt->execute()) {
                     echo "<div class='alert alert-success'>Record was updated.</div>";
@@ -75,6 +83,14 @@
                     <td><input type='text' name='price' value="<?php echo $price;  ?>" class='form-control' /></td>
                 </tr>
                 <tr>
+                    <td>Manufacture date</td>
+                    <td><input type='date' name='manufacture_date' value="<?php echo $manufacture_date;  ?>" class='form-control' /></td>
+                </tr>
+                <tr>
+                    <td>Expired date</td>
+                    <td><input type='date' name='expired_date' value="<?php echo $expired_date;  ?>" class='form-control' /></td>
+                </tr>
+                <tr>
                     <td></td>
                     <td>
                         <input type='submit' value='Save Changes' class='btn btn-primary' />
@@ -86,6 +102,7 @@
 
     </div>
     <!-- end .container -->
+
 </body>
 
 </html>
