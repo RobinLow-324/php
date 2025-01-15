@@ -79,7 +79,7 @@
                 echo "<td>" . htmlspecialchars($expired_date, ENT_QUOTES) . "</td>";
                 echo "<td>";
                 // Read one record
-                echo "<a href='read_one.php?id={$id}' class='btn btn-info m-r-1em'>Read</a>";
+                echo "<a href='product_details?id={$id}' class='btn btn-info m-r-1em'>Read</a>";
 
                 // Edit record
                 echo "<a href='product_update.php?id={$id}' class='btn btn-primary m-r-1em'>Edit</a>";
