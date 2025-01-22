@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 22, 2025 at 04:39 AM
+-- Generation Time: Jan 22, 2025 at 04:47 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `product_cat` (
 INSERT INTO `product_cat` (`product_cat_id`, `product_cat_name`, `product_cat_description`) VALUES
 (101, 'Electronics', 'Devices like smartphones, laptops, and accessories.'),
 (102, 'Fashion', 'Clothing and accessories for all genders and ages.'),
-(103, 'Home Appliances', 'Appliances like refrigerators, microwaves, and washing machines.'),
+(103, 'Sport', 'All sporting goods'),
 (104, 'Books', 'Printed and digital books across various genres.');
 COMMIT;
 
