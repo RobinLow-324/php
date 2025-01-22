@@ -79,6 +79,9 @@
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $emailInput = trim($_POST["emailInput"]);
                 $passwordInput = trim($_POST["passwordInput"]);
+
+                $validator = new Validation();
+
                 $validator->validateRequired($emailInput, "Username");
                 $validator->validateRequired($passwordInput, "Password");
 
@@ -136,7 +139,6 @@
 
             <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
         </form>
-
 
 
     </main>
