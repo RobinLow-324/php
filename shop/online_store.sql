@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 15, 2025 at 05:08 AM
+-- Generation Time: Jan 22, 2025 at 04:39 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -66,26 +66,27 @@ CREATE TABLE IF NOT EXISTS `products` (
   `description` text NOT NULL,
   `price` double NOT NULL,
   `promotion_price` double NOT NULL,
-  `created` datetime NOT NULL,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `manufacture_date` datetime NOT NULL,
-  `expired_date` datetime NOT NULL,
+  `manufacture_date` date NOT NULL,
+  `expired_date` date NOT NULL,
+  `created` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `promotion_price`, `created`, `modified`, `manufacture_date`, `expired_date`) VALUES
-(1, 'Basketball', 'A ball used in the NBA.', 49.99, 0, '2015-08-02 12:04:03', '2015-08-05 22:59:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Gatorade', 'This is a very good drink for athletes.', 1.99, 0, '2015-08-02 12:14:29', '2015-08-05 22:59:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'Eye Glasses', 'It will make you read better.', 6, 0, '2015-08-02 12:15:04', '2015-08-05 22:59:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, 'Trash Can', 'It will help you maintain cleanliness.', 3.95, 0, '2015-08-02 12:16:08', '2015-08-05 22:59:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(6, 'Mouse', 'Very useful if you love your computer.', 11.35, 0, '2015-08-02 12:17:58', '2015-08-05 22:59:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(7, 'Earphone', 'You need this one if you love music.', 7, 0, '2015-08-02 12:18:21', '2015-08-05 22:59:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(8, 'Pillow', 'Sleeping well is important.', 8.99, 0, '2015-08-02 12:18:56', '2015-08-05 22:59:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(9, 'Bread', '', 5.5, 0, '2024-12-13 03:04:41', '2024-12-13 03:04:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `promotion_price`, `manufacture_date`, `expired_date`, `created`) VALUES
+(1, 'Basketball', 'A ball used in the NBA.', 49.99, 0, '2025-01-15', '0000-00-00', NULL),
+(3, 'Gatorade', 'This is a very good drink for athletes.', 1.99, 0, '2025-01-15', '0000-00-00', NULL),
+(4, 'Eye Glasses', 'It will make you read better.', 6, 0, '2025-01-15', '0000-00-00', NULL),
+(5, 'Trash Can', 'It will help you maintain cleanliness.', 3.95, 0, '2025-01-15', '0000-00-00', NULL),
+(6, 'Mouse', 'Very useful if you love your computer.', 11.35, 0, '2025-01-15', '0000-00-00', NULL),
+(7, 'Earphone', 'You need this one if you love music.', 7, 0, '2025-01-15', '0000-00-00', NULL),
+(8, 'Pillow', 'Sleeping well is important.', 8.99, 0, '2025-01-15', '0000-00-00', NULL),
+(9, 'Bread', 'very nice', 10, 0, '2025-01-15', '2025-01-25', NULL),
+(11, 'hotdog', 'very hot', 15, 10, '2025-01-15', '2025-01-25', '2025-01-15'),
+(12, 'Laptop', 'RTX3060 , 520GB , 12Ram', 4000, 3800, '2025-01-15', '0000-00-00', '2025-01-15');
 
 -- --------------------------------------------------------
 
