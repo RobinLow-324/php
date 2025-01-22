@@ -126,7 +126,7 @@
                     <td></td>
                     <td>
                         <input type='submit' value='Save' class='btn btn-primary' />
-                        <a href='index.php' class='btn btn-danger'>Back to customers list</a>
+                        <a href='customer_list.php' class='btn btn-danger'>Back to customers list</a>
                     </td>
                 </tr>
             </table>

@@ -22,6 +22,8 @@
 
         $num = $stmt->rowCount();
 
+        echo "\n <a href='customer_create.php' class='btn btn-primary m-b-1em'>Create New User</a>";
+
         if ($num > 0) {
 
             echo "<table class='table table-hover table-responsive table-bordered'>";
