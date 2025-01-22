@@ -47,8 +47,7 @@
                 echo "<td>{$gender}</td>";
                 echo "<td>{$account_status}</td>";
                 echo "<td>";
-                echo "<a href='customer_details.php?id={$id}' class='btn btn-info m-r-1em'>View</a>";
-                echo "<a href='customer_edit.php?id={$id}' class='btn btn-primary m-r-1em'>Edit</a>";
+                echo "<a href='customer_update.php?id={$id}' class='btn btn-primary m-r-1em'>Edit</a>";
                 echo "<a href='#' onclick='delete_customer({$id});'  class='btn btn-danger'>Delete</a>";
                 echo "</td>";
                 echo "</tr>";

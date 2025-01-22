@@ -36,7 +36,6 @@
 
         .form-signin .btn-primary:hover {
             background-color: #0040FF;
-
         }
 
         .form-control {
@@ -56,7 +55,6 @@
     </style>
 </head>
 
-
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="form-signin w-100 m-auto text-center">
         <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>' method="post">
@@ -72,69 +70,79 @@
                 <input type="password" class="form-control" id="passwordInput" name="passwordInput" placeholder="Password">
                 <label for="passwordInput">Password</label>
             </div>
+
             <?php
+            session_start();
             include 'config/database.php';
-            if ($_POST) {
-                $emailInput = $_POST["emailInput"];
-                $passwordInput = $_POST["passwordInput"];
-                $errors[] = "";
+            include 'Validation.php';
 
-                if (empty($emailInput)) {
-                    $errors[] = "Enter Username.";
-                }
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $emailInput = trim($_POST["emailInput"]);
+                $passwordInput = trim($_POST["passwordInput"]);
 
-                if (empty($passwordInput)) {
-                    $errors[] = "Enter Password.";
-                }
+                $validator = new Validation();
 
-                if (!empty($errors)) {
-                    echo "<div class ='alert alert-danger'><ul>";
-                    foreach ($errors as $error) {
-                        echo "<li>{$error}</li>";
+                $validator->validateRequired($emailInput, "Username");
+                $validator->validateRequired($passwordInput, "Password");
+
+                if (!$validator->isValid()) {
+                    echo "<div class='alert alert-danger'><ul>";
+                    foreach ($validator->getErrors() as $error) {
+                        echo "<li>" . htmlspecialchars($error) . "</li>";
                     }
                     echo "</ul></div>";
                 } else {
-                    $query = "SELECT username, password, account_status FROM customer WHERE username = ? LIMIT 0,1";
+                    $query = "SELECT id, username, password, account_status FROM customers WHERE username = ? LIMIT 1";
                     $stmt = $con->prepare($query);
                     $stmt->bindParam(1, $emailInput);
-                    $stmt->execute();
-                    $num = $stmt->rowCount();
 
-                    if ($num > 0) {
-                        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                        $pss = $row["password"];
-                        $acc = $row["account_status"];
-                        if ($pss === $passwordInput) {
-                            if ($acc == 1) {
-                                $_SESSION['ID'] = 1;
-                                $_SESSION['Name'] = $emailInput;
-                                $_SESSION['Success'] = true;
-                                header('Location : product_listing.php ');
-                                exit();
+                    if ($stmt->execute()) {
+                        $num = $stmt->rowCount();
+                        if ($num > 0) {
+                            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                            $hashedPassword = $row["password"];
+                            $accountStatus = $row["account_status"];
+
+                            if ($passwordInput == $hashedPassword) {
+                                if ($accountStatus == "Active") {
+                                    $_SESSION['ID'] = $row['id'];
+                                    $_SESSION['Name'] = $emailInput;
+                                    $_SESSION['Success'] = true;
+                                    header('Location: customer_list.php');
+                                    exit();
+                                } else {
+                                    echo "<div class='alert alert-danger'><ul>";
+                                    echo "<li>Account is not active. Please contact customer service.</li>";
+                                    echo "</ul></div>";
+                                }
                             } else {
-                                echo "<div class='alert-danger'><ul> ";
-                                echo "<li>Acc is not active. please contact customer service. </li>";
+                                echo "<div class='alert alert-danger'><ul>";
+                                echo "<li>Invalid Password</li>";
                                 echo "</ul></div>";
                             }
                         } else {
-                            echo "<div class='alert-danger'><ul> ";
-                            echo "<li>Invalid Password </li>";
+                            echo "<div class='alert alert-danger'><ul>";
+                            echo "<li>Invalid Username</li>";
                             echo "</ul></div>";
                         }
                     } else {
-                        echo "<div class='alert-danger'><ul> ";
-                        echo "<li>Invalid Username </li>";
+                        echo "<div class='alert alert-danger'><ul>";
+                        echo "<li>Database error. Please try again later.</li>";
                         echo "</ul></div>";
                     }
                 }
             }
 
+            session_unset();
+            session_destroy();
             ?>
+
             <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
         </form>
+
+
+
     </main>
-
-
 </body>
 
 </html>
