@@ -79,9 +79,6 @@
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $emailInput = trim($_POST["emailInput"]);
                 $passwordInput = trim($_POST["passwordInput"]);
-
-                $validator = new Validation();
-
                 $validator->validateRequired($emailInput, "Username");
                 $validator->validateRequired($passwordInput, "Password");
 
