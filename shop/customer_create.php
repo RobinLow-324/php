@@ -1,5 +1,8 @@
 <!DOCTYPE HTML>
 <html>
+<?php
+include 'Menu.php';
+?>
 
 <head>
     <title>Create Customer - PHP CRUD Tutorial</title>

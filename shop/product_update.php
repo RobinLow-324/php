@@ -1,5 +1,8 @@
 <!DOCTYPE HTML>
 <html>
+<?php
+include 'Menu.php';
+?>x
 
 <head>
     <title>PDO - Read Records - PHP CRUD Tutorial</title>

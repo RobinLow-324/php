@@ -1,5 +1,8 @@
 <!DOCTYPE HTML>
 <html>
+<?php
+include 'Menu.php';
+?>
 
 <head>
     <title>PDO - Create a Record - PHP CRUD Tutorial</title>

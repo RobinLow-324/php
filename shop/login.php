@@ -60,7 +60,7 @@
         <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>' method="post">
             <img class="mb-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyxgAv7kkuH0aAy2xNOtC4zMDX-jVnJmgsuw&s" alt="Logo" width="72" height="72">
 
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 fw-normal">Please login</h1>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="emailInput" name="emailInput" placeholder="Email address">
                 <label for="emailInput">Username</label>
@@ -137,7 +137,7 @@
             session_destroy();
             ?>
 
-            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+            <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
         </form>
 
 
