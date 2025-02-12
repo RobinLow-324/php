@@ -1,8 +1,9 @@
-<!DOCTYPE HTML>
-<html>
 <?php
 include 'Menu.php';
 ?>
+
+<!DOCTYPE HTML>s
+<html>
 
 <head>
     <title>Create Customer - PHP CRUD Tutorial</title>
@@ -32,6 +33,7 @@ include 'Menu.php';
 
                 $errors = [];
 
+                // 验证输入是否为空
                 if (empty($username)) {
                     $errors[] = "Username is required.";
                 }
@@ -54,6 +56,17 @@ include 'Menu.php';
                     $errors[] = "Account status is required.";
                 }
 
+                // 检查用户名是否已存在
+                $query = "SELECT username FROM customers WHERE username = :username";
+                $stmt = $con->prepare($query);
+                $stmt->bindParam(':username', $username);
+                $stmt->execute();
+
+                if ($stmt->rowCount() > 0) {
+                    $errors[] = "Username already exists. Please choose another.";
+                }
+
+                // 显示错误信息
                 if (!empty($errors)) {
                     echo "<div class='alert alert-danger'><ul>";
                     foreach ($errors as $error) {

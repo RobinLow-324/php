@@ -84,16 +84,14 @@
             echo "<th>ID</th>";
             echo "<th>
                     Name 
-                    <a href='?search=$search_name&sort_column=name&sort_order=$name_sort_order' class='ms-1'>
-                        " . ($sort_column == 'name' ? ($sort_order == 'ASC' ? '🔼' : '🔽') : '') . "
-                    </a>
+                    <a href='?search=$search_name&sort_column=name&sort_order=asc' class='ms-1'>▲</a>
+                    <a href='?search=$search_name&sort_column=name&sort_order=desc' class='ms-1'>▼</a>
                   </th>";
             echo "<th>Description</th>";
             echo "<th>
                     Price 
-                    <a href='?search=$search_name&sort_column=price&sort_order=$price_sort_order' class='ms-1'>
-                        " . ($sort_column == 'price' ? ($sort_order == 'ASC' ? '🔼' : '🔽') : '') . "
-                    </a>
+                    <a href='?search=$search_name&sort_column=price&sort_order=asc' class='ms-1'>▲</a>
+                    <a href='?search=$search_name&sort_column=price&sort_order=desc' class='ms-1'>▼</a>
                   </th>";
             echo "<th>Manufacture Date</th>";
             echo "<th>Expired Date</th>";
