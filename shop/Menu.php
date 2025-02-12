@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="customer_create.php">Create new customer</a>
+                    <a class="nav-link  " aria-current="page" href="customer_create.php">Create new customer</a>
                 </li>
 
                 <li class="nav-item">

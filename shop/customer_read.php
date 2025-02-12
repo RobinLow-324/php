@@ -13,12 +13,10 @@
         </div>
 
         <?php
-        // Include database connection
         include 'config/database.php';
 
         $id = isset($_GET['id']) ? intval($_GET['id']) : die('ERROR: Customer ID not found.');
 
-        // Fetch customer details
         $query = "SELECT id, username, first_name, last_name, gender, account_status FROM customers WHERE id = :id";
         $stmt = $con->prepare($query);
         $stmt->bindParam(':id', $id);

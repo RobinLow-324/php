@@ -53,7 +53,7 @@
         $sort_order = isset($_GET['sort_order']) && $_GET['sort_order'] === 'desc' ? 'DESC' : 'ASC';
 
         // Select data query with search and sorting
-        $query = "SELECT id, name, description, price, expired_date, manufacture_date FROM products 
+        $query = "SELECT id, name, description, price, expired_date, manufacture_date ,promotion_price FROM products 
                   WHERE name LIKE :name 
                   ORDER BY $sort_column $sort_order";
         $stmt = $con->prepare($query);
