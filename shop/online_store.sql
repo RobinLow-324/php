@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 22, 2025 at 07:12 AM
+-- Generation Time: Feb 12, 2025 at 06:23 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `registration_date_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `account_status` varchar(20) CHARACTER SET utf16 COLLATE utf16_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf16;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf16;
 
 --
 -- Dumping data for table `customers`
@@ -49,8 +49,7 @@ INSERT INTO `customers` (`id`, `username`, `password`, `first_name`, `last_name`
 (1, 'William', '2345', 'wei', 'jian', 'Male', '2006-06-15', '2024-12-18 05:40:26', 'Active'),
 (2, 'Jun_wei', '2506', 'Jun', 'Wei', 'Male', '2003-08-22', '2024-12-18 05:40:26', 'Active'),
 (3, 'jian_bin', '2010', 'Jian', 'Bin', 'Male', '2003-01-10', '2024-12-18 05:40:26', 'Inactive'),
-(4, 'Harry', '2005', 'Harry', 'Potter', 'Male', '1998-03-27', '2024-12-18 05:40:26', 'Pending'),
-(5, 'Kai_wei', '2007', 'Kai', 'Wei', 'Male', '2005-12-05', '2024-12-18 05:40:26', 'Active'),
+(4, 'Harry', '2004', 'Harry', 'Potter', 'Male', '1998-03-27', '2024-12-18 05:40:26', 'Pending'),
 (6, 'Robin_low', '1995', 'robin', 'low', 'Male', '2005-03-24', '2024-12-18 06:00:24', 'Active');
 
 -- --------------------------------------------------------
@@ -71,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `created` date DEFAULT NULL,
   `category_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `products`
@@ -81,13 +80,12 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `promotion_price`,
 (1, 'Basketball', 'A ball used in the NBA.', 49.99, 0, '2025-01-15', '0000-00-00', NULL, NULL),
 (3, 'Gatorade', 'This is a very good drink for athletes.', 1.99, 0, '2025-01-15', '0000-00-00', NULL, NULL),
 (4, 'Eye Glasses', 'It will make you read better.', 6, 0, '2025-01-15', '0000-00-00', NULL, NULL),
-(5, 'Trash Can', 'It will help you maintain cleanliness.', 3.95, 0, '2025-01-15', '0000-00-00', NULL, NULL),
-(6, 'Mouse', 'Very useful if you love your computer.', 11.35, 0, '2025-01-15', '0000-00-00', NULL, NULL),
 (7, 'Earphone', 'You need this one if you love music.', 7, 0, '2025-01-15', '0000-00-00', NULL, NULL),
-(8, 'Pillow', 'Sleeping well is important.', 8.99, 0, '2025-01-15', '0000-00-00', NULL, NULL),
 (9, 'Bread', 'very nice', 10, 0, '2025-01-15', '2025-01-25', NULL, NULL),
 (11, 'hotdog', 'very hot', 15, 10, '2025-01-15', '2025-01-25', '2025-01-15', NULL),
-(12, 'Laptop', 'RTX3060 , 520GB , 12Ram', 4000, 3800, '2025-01-15', '0000-00-00', '2025-01-15', NULL);
+(12, 'Laptop', 'RTX3060 , 520GB , 12Ram', 4000, 3800, '2025-01-15', '0000-00-00', '2025-01-15', NULL),
+(14, 'Destop', '45 inch', 500, 450, '2025-02-05', '0000-00-00', '2025-02-05', NULL),
+(15, 'Keyboard', 'Gaming', 160, 150, '2025-02-05', '0000-00-00', '2025-02-05', NULL);
 
 -- --------------------------------------------------------
 
