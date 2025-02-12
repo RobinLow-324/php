@@ -13,7 +13,6 @@ include 'Menu.php';
 </head>
 
 <body>
-    <!-- container -->
     <div class="container">
         <div class="page-header">
             <h1>Create Product</h1>
@@ -34,11 +33,11 @@ include 'Menu.php';
                 if (empty($name)) {
                     $errors[] = "Name is required.";
                 }
-                if (empty($price) || !is_numeric($price)) {
+                if (empty($price) || !is_numeric($price) || $price <= 0) {
                     $errors[] = "Valid price is required.";
                 }
-                if (!empty($promotion_price) && (!is_numeric($promotion_price) || $promotion_price >= $price)) {
-                    $errors[] = "Promotion price must be a number and less than the original price.";
+                if (!empty($promotion_price) && (!is_numeric($promotion_price) || $promotion_price <= 0 || $promotion_price >= $price)) {
+                    $errors[] = "Promotion price must be a positive number and less than the original price.";
                 }
                 if (!empty($manufacture_date) && !checkdate(substr($manufacture_date, 5, 2), substr($manufacture_date, 8, 2), substr($manufacture_date, 0, 4))) {
                     $errors[] = "Invalid manufacture date.";
@@ -46,11 +45,10 @@ include 'Menu.php';
                 if (!empty($expired_date) && !checkdate(substr($expired_date, 5, 2), substr($expired_date, 8, 2), substr($expired_date, 0, 4))) {
                     $errors[] = "Invalid expiry date.";
                 }
-                if (!empty($manufacture_date) && !empty($expiry_date) && strtotime($expiry_date) <= strtotime($manufacture_date)) {
-                    $errors[] = "Expired date date must be later than manufacture date.";
+                if (!empty($manufacture_date) && !empty($expired_date) && strtotime($expired_date) <= strtotime($manufacture_date)) {
+                    $errors[] = "Expired date must be later than manufacture date.";
                 }
 
-                // Display errors
                 if (!empty($errors)) {
                     echo "<div class='alert alert-danger'><ul>";
                     foreach ($errors as $error) {
@@ -58,8 +56,11 @@ include 'Menu.php';
                     }
                     echo "</ul></div>";
                 } else {
-                    $query = "INSERT INTO products SET name=:name, description=:description, price=:price, promotion_price=:promotion_price, manufacture_date=:manufacture_date, expired_date=:expired_date, created=:created";
+                    $query = "INSERT INTO products 
+                      SET name=:name, description=:description, price=:price, promotion_price=:promotion_price, 
+                          manufacture_date=:manufacture_date, expired_date=:expired_date, created=:created";
                     $stmt = $con->prepare($query);
+
                     $stmt->bindParam(':name', $name);
                     $stmt->bindParam(':description', $description);
                     $stmt->bindParam(':price', $price);

@@ -21,7 +21,7 @@ include 'Menu.php';
         include 'config/database.php';
 
         try {
-            $query = "SELECT id, name, description, price, expired_date, manufacture_date FROM products WHERE id = ? LIMIT 0,1";
+            $query = "SELECT id, name, description, price, expired_date, manufacture_date, promotion_price FROM products WHERE id = ? LIMIT 0,1";
             $stmt = $con->prepare($query);
 
             $stmt->bindParam(1, $id);
@@ -35,6 +35,7 @@ include 'Menu.php';
             $price = $row['price'];
             $manufacture_date = $row['manufacture_date'];
             $expired_date = $row['expired_date'];
+            $promotion_price = $row['promotion_price'];
         } catch (PDOException $exception) {
             die('ERROR: ' . $exception->getMessage());
         }
@@ -43,32 +44,41 @@ include 'Menu.php';
         <?php
         if ($_POST) {
             try {
-                $query = "UPDATE products
-                  SET name=:name, description=:description, price=:price, manufacture_date=:manufacture_date, expired_date=:expired_date WHERE id = :id";
-                $stmt = $con->prepare($query);
-
+                // 获取输入值并进行清理
                 $name = htmlspecialchars(strip_tags($_POST['name']));
                 $description = htmlspecialchars(strip_tags($_POST['description']));
                 $price = htmlspecialchars(strip_tags($_POST['price']));
                 $manufacture_date = htmlspecialchars(strip_tags($_POST['manufacture_date']));
                 $expired_date = htmlspecialchars(strip_tags($_POST['expired_date']));
+                $promotion_price = htmlspecialchars(strip_tags($_POST['promotion_price']));
 
-
-                $stmt->bindParam(':name', $name);
-                $stmt->bindParam(':description', $description);
-                $stmt->bindParam(':price', $price);
-                $stmt->bindParam(':manufacture_date', $manufacture_date);
-                $stmt->bindParam(':expired_date', $expired_date);
-                $stmt->bindParam(':id', $id);
-                if ($stmt->execute()) {
-                    echo "<div class='alert alert-success'>Record was updated.</div>";
+                if ($promotion_price >= $price) {
+                    echo "<div class='alert alert-danger'>Promotion price must be less than the original price.</div>";
                 } else {
-                    echo "<div class='alert alert-danger'>Unable to update record. Please try again.</div>";
+                    $query = "UPDATE products
+                      SET name=:name, description=:description, price=:price, manufacture_date=:manufacture_date, expired_date=:expired_date, promotion_price=:promotion_price 
+                      WHERE id = :id";
+                    $stmt = $con->prepare($query);
+
+                    $stmt->bindParam(':name', $name);
+                    $stmt->bindParam(':description', $description);
+                    $stmt->bindParam(':price', $price);
+                    $stmt->bindParam(':manufacture_date', $manufacture_date);
+                    $stmt->bindParam(':expired_date', $expired_date);
+                    $stmt->bindParam(':promotion_price', $promotion_price);
+                    $stmt->bindParam(':id', $id);
+
+                    if ($stmt->execute()) {
+                        echo "<div class='alert alert-success'>Record was updated.</div>";
+                    } else {
+                        echo "<div class='alert alert-danger'>Unable to update record. Please try again.</div>";
+                    }
                 }
             } catch (PDOException $exception) {
                 die('ERROR: ' . $exception->getMessage());
             }
-        } ?>
+        }
+        ?>
 
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id={$id}"); ?>" method="post">
@@ -84,6 +94,10 @@ include 'Menu.php';
                 <tr>
                     <td>Price</td>
                     <td><input type='text' name='price' value="<?php echo $price;  ?>" class='form-control' /></td>
+                </tr>
+                <tr>
+                    <td>Promotion Price</td>
+                    <td><input type='text' name='promotion_price' value="<?php echo $promotion_price; ?>" class='form-control' /></td>
                 </tr>
                 <tr>
                     <td>Manufacture date</td>

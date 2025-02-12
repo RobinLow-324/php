@@ -83,16 +83,19 @@
             echo "<tr>";
             echo "<th>ID</th>";
             echo "<th>
+            <div class='d-flex align-items-center'>
                     Name 
-                    <a href='?search=$search_name&sort_column=name&sort_order=asc' class='ms-1'>▲</a>
-                    <a href='?search=$search_name&sort_column=name&sort_order=desc' class='ms-1'>▼</a>
+                    <a href='?search=$search_name&sort_column=name&sort_order=asc' class='ms-1 text-decoration-none'>▲</a>
+                    <a href='?search=$search_name&sort_column=name&sort_order=desc' class='ms-1 text-decoration-none'>▼</a>
                   </th>";
             echo "<th>Description</th>";
             echo "<th>
+            <div class='d-flex align-items-center'>
                     Price 
-                    <a href='?search=$search_name&sort_column=price&sort_order=asc' class='ms-1'>▲</a>
-                    <a href='?search=$search_name&sort_column=price&sort_order=desc' class='ms-1'>▼</a>
+                    <a href='?search=$search_name&sort_column=price&sort_order=asc' class='ms-1 text-decoration-none'>▲</a>
+                    <a href='?search=$search_name&sort_column=price&sort_order=desc' class='ms-1 text-decoration-none'>▼</a>
                   </th>";
+            echo "<th>promotion_price</th>";
             echo "<th>Manufacture Date</th>";
             echo "<th>Expired Date</th>";
             echo "<th>Action</th>";
@@ -105,15 +108,19 @@
                 echo "<td>" . htmlspecialchars($name, ENT_QUOTES) . "</td>";
                 echo "<td>" . htmlspecialchars($description, ENT_QUOTES) . "</td>";
                 echo "<td>" . htmlspecialchars($price, ENT_QUOTES) . "</td>";
+                echo "<td>" . htmlspecialchars($promotion_price, ENT_QUOTES) . "</td>";
                 echo "<td>" . htmlspecialchars($manufacture_date, ENT_QUOTES) . "</td>";
                 echo "<td>" . htmlspecialchars($expired_date, ENT_QUOTES) . "</td>";
                 echo "<td>
-                        <a href='product_details.php?id={$id}' class='btn btn-info me-1'>Read</a>
-                        <a href='product_update.php?id={$id}' class='btn btn-primary me-1'>Edit</a>
-                        <a href='?confirm_delete={$id}' class='btn btn-danger'>Delete</a>
-                      </td>";
+                <div class='btn-group' role='group'>
+                    <a href='product_details.php?id={$id}' class='btn btn-info'>Read</a>
+                    <a href='product_update.php?id={$id}' class='btn btn-primary'>Edit</a>
+                    <a href='?confirm_delete={$id}' class='btn btn-danger'>Delete</a>
+                </div>
+              </td>";
                 echo "</tr>";
             }
+
 
             echo "</table>";
         } else {
